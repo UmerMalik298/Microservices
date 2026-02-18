@@ -18,7 +18,9 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
-app.MapGet("/ping", () => "Products service OK");
+//app.MapGet("/ping", () => "Products service OK");
+
+app.MapGet("/products/ping", () => "Products service OK");
 
 app.MapGet("/weatherforecast", () =>
 {

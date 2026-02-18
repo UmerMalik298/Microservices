@@ -1,0 +1,44 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "5000:8080"
+    depends_on:
+      - orders-api
+      - products-api
+      - users-api
+
+  orders-api:
+    build:
+      context: .
+      dockerfile: Orders.Api/Dockerfile
+    container_name: orders-api
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+
+  products-api:
+    build:
+      context: .
+      dockerfile: Products.Api/Dockerfile
+    container_name: products-api
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+
+  users-api:
+    build:
+      context: .
+      dockerfile: Users.Api/Dockerfile
+    container_name: users-api
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+
+  notifications-worker:
+    build:
+      context: .
+      dockerfile: Notifications.Worker/Dockerfile
+    container_name: notifications-worker
+    depends_on:
+      - orders-api
